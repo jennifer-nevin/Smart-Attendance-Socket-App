@@ -28,9 +28,7 @@ class _AttendanceHomeState extends State<AttendanceHome> {
   final TextEditingController _controller = TextEditingController();
   String statusMessage = "Enter name to mark attendance";
 
-  // TODO: CHANGE THIS IP
-  // Use "10.0.2.2" for Android Emulator
-  // Use Your PC IP (e.g., 192.168.1.X) for Physical Device
+ 
   static const String serverIp = "172.20.155.30"; 
   static const int serverPort = 65432;
 
@@ -54,10 +52,10 @@ class _AttendanceHomeState extends State<AttendanceHome> {
 
       // 2. Send Data
       socket.write("ADD:$name");
-      await socket.flush(); // Ensure data leaves the phone
+      await socket.flush();
 
       // 3. Listen for Response
-      // We use a broadcast stream approach to listen for the server response
+      
       socket.listen(
         (List<int> event) {
           final response = String.fromCharCodes(event).trim();
@@ -70,7 +68,7 @@ class _AttendanceHomeState extends State<AttendanceHome> {
           socket.destroy();
         },
         onDone: () {
-          // Server closed connection (expected behavior)
+    
           socket.destroy();
         },
       );
@@ -115,3 +113,4 @@ class _AttendanceHomeState extends State<AttendanceHome> {
     );
   }
 }
+
